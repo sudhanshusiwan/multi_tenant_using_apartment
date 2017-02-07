@@ -1,0 +1,11 @@
+development:
+  adapter: postgresql
+  timeout: 5000
+  encoding: utf8
+  reconnect: false
+  database: multishop
+  pool: 25
+  username: chris
+  password: root
+  host: localhost
+  port: 5432

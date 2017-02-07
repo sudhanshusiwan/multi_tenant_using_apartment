@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <h2>Products in Cart</h2>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+      <% @cart.cart_items.each do |cart_item| %>
+          <tr>
+            <!-- Todo: take product form association create many to many association -->
+            <% product = Product.find(cart_item.product_id) %>
+
+            <td><%= product.name %></td>
+            <td><%= product.price %></td>
+
+            <td><%= link_to 'Show', product %></td>
+          </tr>
+      <% end %>
+
+      <tr>
+        <% if @cart.cart_items.present? %>
+          <% price_array = @cart.cart_items.map { |cart_item| product = Product.find(cart_item.product_id).price } %>
+        <% end %>
+        <td><strong>Total Cost</strong></td>
+        <td><%= price_array.sum rescue 'No product in cart.' %></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <%= link_to 'Checkout', checkout_cart_items_path, :class => 'btn btn-primary' %>
+</div>
